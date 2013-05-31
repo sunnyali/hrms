@@ -1691,3 +1691,7 @@ div.personalDetails {
     margin-top: 23px;
 }
 /* ================ Personal Details styles: End ================ */
+
+.cursor{
+	cursor:pointer;
+}

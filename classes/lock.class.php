@@ -1,5 +1,5 @@
 <?php
-require_once ($_SERVER['DOCUMENT_ROOT'].'/hrm/classes/__autoload.php');
+require_once ($_SERVER['DOCUMENT_ROOT'].'/hrms/classes/__autoload.php');
 
 /* Lock class is based class for many classes used in this system
  * This Class have methods which is used in whole project 

@@ -5,6 +5,6 @@ function __autoload($classname) {
 	{
 		session_start();
 	}
-	include($_SERVER['DOCUMENT_ROOT']."/hrm/classes/".$classname.".class.php");
+	include($_SERVER['DOCUMENT_ROOT']."/hrms/classes/".$classname.".class.php");
 }
 ?>

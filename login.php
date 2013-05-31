@@ -1,6 +1,6 @@
 
 <?php
-    require ($_SERVER['DOCUMENT_ROOT'].'/hrm/classes/__autoload.php');
+    require ($_SERVER['DOCUMENT_ROOT'].'/hrms/classes/__autoload.php');
 
     dbName::mysql_db(0);
     
@@ -17,7 +17,7 @@
         if($chk)
         {
             $checkpage = new allowpage();
-            header("location: $checkpage->web/hrm/index.php");
+            header("location: $checkpage->web/hrms/substation.php");
             die();
         }
         else
