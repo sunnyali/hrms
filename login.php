@@ -1,4 +1,3 @@
-
 <?php
     if(isset($_SESSION))
     {
@@ -14,8 +13,8 @@
         $mypassword=addslashes($_POST['password']);
         $myusername=htmlspecialchars($myusername);
         $mypassword=htmlspecialchars($mypassword);
-        $myusername=mysql_real_escape_string($myusername);
-        $mypassword=mysql_real_escape_string($mypassword);
+       // $myusername=mysql_real_escape_string($myusername);
+       // $mypassword=mysql_real_escape_string($mypassword);
         $chk = NULL;
         $chk = dbConn::validate($myusername, $mypassword , true);
         if($chk)
@@ -44,7 +43,8 @@
 
 	<link href="css/style.css" rel="stylesheet" type="text/css"/>
     
-	
+	<link rel="stylesheet" href="css/validationEngine.jquery.css" type="text/css"/>
+    <link rel="stylesheet" href="css/jquery-ui.css" type="text/css"/>
 	<!--[if lte IE 6]>
 	<link href="/symfony/web/css/IE6_style.css" rel="stylesheet" type="text/css"/>
 	<![endif]-->
@@ -84,7 +84,7 @@
     #divLogin {
         background: transparent url(images/login/login.png) no-repeat center top;
         height: 520px;
-        width: 100%;
+        width: 98%;
         border-style: hidden;
         margin: auto;
         padding-left: 10px;
@@ -153,6 +153,7 @@
     }
 
     #divLogo {
+        visibility:hidden;
         padding-left: 30%;
         padding-top: 70px;
     }
@@ -167,18 +168,17 @@
 
 </style>
 
-<div style="position:relative; left:650px; top:210px;"><font style="color:red; font-weight:bold;">( Username : Admin | Password : admin )</font></div>
-
 <div id="divLogin">
+
     <div id="divLogo">
-        <img src="images/login/logo.png" />
+        <img src="images/login/logo.bmp" width="207" height="70" />
     </div>
 
-    <form id="frmLogin" method="post" action="">
+    <form id="frmLogin" onsubmit="return jQuery(this).validationEngine('validate');" class="formular" method="post" action="">
         <div id="divUsername" class="textInputContainer">
-            <input name="username" id="txtUsername" type="text" value="Admin" />        </div>
+            <input name="username" id="txtUsername" class="validate[required] text-input" type="text" value="Admin" />        </div>
         <div id="divPassword" class="textInputContainer">
-            <input name="password" id="txtPassword" type="password" value="admin" />        </div>
+            <input name="password" id="txtPassword" class="validate[required] text-input" type="password" value="admin" />        </div>
         <div id="divLoginHelpLink"></div>
         <div id="divLoginButton">
             <input type="submit" name="Submit" class="button" id="btnLogin" value=" " />
@@ -205,11 +205,14 @@
 </style>
 <div id="divFooter" >
     <span id="spanCopyright">
-        <a href="#" target="_blank">Company Name</a> 
-        ver Live 2.5 &copy; Company Name. 2013 - <?php echo date('Y'); ?> All rights reserved.
+        Copyright &copy; <a href="http://www.1800sunstaff.com/" target="_blank">Sunrise Staffing</a>. 2013 - <?php echo date('Y') ?> All rights reserved.
     </span>
     <br class="clear" />
 </div>
-    
+            <script src="js/jquery-1.9.1.js" type="text/javascript"> </script>
+            <script src="js/jquery-ui.js" type="text/javascript"> </script>
+            <script src="js/RequiredValidator.js" type="text/javascript"> </script>
+            <script src="js/jquery.validationEngine-en.js" type="text/javascript"> </script>
+            <script src="js/jquery.validationEngine.js" type="text/javascript" ></script>
       </body>
 </html>

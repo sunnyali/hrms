@@ -496,8 +496,7 @@ input:disabled, select:disabled, textarea:disabled {
     background-color: #DDD;
 }
 form ol {
-	border-bottom:1px solid #dedede;
-	overflow:hidden;
+	
     padding-bottom: 5px;  /* ruchira: fix overlap between validation error in last input field */    
     margin-bottom: 10px;
 }
@@ -545,7 +544,7 @@ form ol li .label {
 	margin:0;
 }
 */
-form ol li input {
+form ol li input[type=file], input[type=text] {
 	float:left;
 	width:225px;
 }

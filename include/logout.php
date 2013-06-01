@@ -4,6 +4,7 @@
 
 	if(session_destroy())
 	{
-	header("Location:  $checkpage->web/login.php");
+		session_destroy();
+		header("Location:  $checkpage->web/login.php");
 	}
 ?>

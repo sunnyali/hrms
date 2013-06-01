@@ -2,7 +2,7 @@
 class dbName{
 	//array contain all database names.
  	//private static $db = array('principal_builders_hr','pb_accounts','deactivate','archive_accounts','procurement','labour');
- 	private static $db = array('hrm');
+ 	private static $db = array('sunrisehrm');
     
  	public static function mysql_db($id,$new=false){
  		if(!isset($_SESSION))

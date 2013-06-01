@@ -3,8 +3,8 @@
     $checkpage = new allowpage();
     dbName::mysql_db(0);
     $lock = new lock();
-    if(isset($_POST['submit-add-employee'])){
-        if($_SESSION['emp_id'] == $_POST['user_id']) {
+    if(isset($_POST['submit-add-employee'])){ 
+ //       if($_SESSION['emp_id'] == $_POST['user_id']) {
 
             $rules = array(
                 "firstName"=>array(
@@ -31,17 +31,17 @@
                     "maxlength"=>"Input is more character then required"
                 ),
             );
-            $Validator = new Validator($rules,$message);
+            $Validator = new validator($rules,$message);
  
             if(!$Validator->isValid($_POST)) {
                 $error = true;
                 $fmsg = $Validator->CountError();
             } else {
-                $sucess = $lock->insert('basic_info');
+                $sucess = $lock->insert('basic_info'); // basic info table name
             }   
 
         }    
-    }
+    //}
 
     if(isset($sucess)) {
         header("Location:$checkpage->phpself?sucess=true");
@@ -58,18 +58,19 @@
 
 ?>
 
-    <?php include ($checkpage->root.'\include\header.php'); ?>
-
+    <?php include ($checkpage->root.'/include/header.php'); ?>
+        <link rel="stylesheet" href="../css/validationEngine.jquery.css" type="text/css"/>
+        <link rel="stylesheet" href="../css/jquery-ui.css" type="text/css"/>  
     </head>
     <body>
       
         <div id="wrapper">
             
             <input type="hidden" id="select_menu" value="2.1" />      
-            <?php //include ($checkpage->root.'\include\logo.php'); ?>
+            <?php //include ($checkpage->root.'/include/logo.php'); ?>
             
             <!-- include Drop down Menu-->
-            <?php include ($checkpage->root.'\include\dropdown.php'); ?>
+            <?php include ($checkpage->root.'/include/dropdown.php'); ?>
             <!-- Drop down Menu End-->
             <div id="content">
                 <div class="box">
@@ -79,36 +80,36 @@
                     </div>
 
                     <div class="inner">
-                        <form method="post" enctype="multipart/form-data">
+<form id="formID" onsubmit="return jQuery(this).validationEngine('validate');" class="formular" method="post" enctype="multipart/form-data">
                             <fieldset>
                                 <ol>
+                                    <br>
                                     <li class="nameContainer"><label class="hasTopFieldHelp">Full Name</label>
                                         <ol class="fieldsInLine">
                                             <li>
                                                 <div class="fieldDescription"><em>*</em> First Name</div>
-                                                <input class="" maxlength="30" type="text" name="firstName">
+                 <input  maxlength="30" type="text" name="firstName" class="validate[required] text-input">
                                             </li>
                                             <li>
                                                 <div class="fieldDescription">Middle Name</div>
-                                                <input class="" maxlength="30" type="text" name="middleName">
+                                                <input maxlength="30" type="text" name="middleName">
                                             </li>
                                             <li>
                                                 <div class="fieldDescription"><em>*</em> Last Name</div>
-                                                <input class="" maxlength="30" type="text" name="lastName">
+                                                <input maxlength="30" type="text" name="lastName" class="validate[required] text-input">
                                             </li>
                                         </ol>
                                     </li>
-                                    <li><label for="photofile">Photograph</label>
-                                        <input class="" type="file" name="photofile"><label class="fieldHelpBottom">Accepts jpg, .png, .gif up to 1MB. Recommended dimensions: 200px X 200px</label>
-                                    </li>
+                                    
                                     <li class="required">
                                         <em>*</em> Required field
                                     </li>
+                                    <li>
+                                        <input type="submit" name="submit-add-employee" value="Save">
+                                    </li>
                                 </ol>
                                 <input type="hidden" name="user_id" value="<?php echo $_SESSION['emp_id'] ?>" />
-                                <p>
-                                    <input type="submit" name="submit-add-employee" value="Save">
-                                </p>
+                                
                             </fieldset>
                         </form>
                     </div>
@@ -120,8 +121,18 @@
         </div> <!-- wrapper -->
         
         <!-- include Footer-->
-            <?php include ($checkpage->root.'\include\footer.php'); ?>
-        <!-- Footer End-->      
+            <?php include ($checkpage->root.'/include/footer.php'); ?>
+		
+
+        <!-- Footer End-->   
+		
+           
+			
+			<script src="../js/RequiredValidator.js" type="text/javascript"> </script>
+            <script src="../js/jquery.validationEngine-en.js" type="text/javascript"> </script>
+			<script src="../js/jquery.validationEngine.js" type="text/javascript" ></script>
+
+			
     </body>
     
 </html>
