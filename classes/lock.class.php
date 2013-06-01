@@ -8,36 +8,13 @@ require_once ($_SERVER['DOCUMENT_ROOT'].'/hrms/classes/__autoload.php');
  
 class lock extends dbConn{
 	private $login_id;
-	public function __construct($bypass = NULL) {
+	public function __construct() {
 		
 			$dbpr = parent::getConnection();
 			
-    		if($bypass != true)
-    		{ 
-				$user_check = $_SESSION['login_user'];
-				$ses_sql = $dbpr->query("select `emp_id`,`level`,`emp_company_email` from `login_info` where `emp_company_email`='$user_check' ");
-
-				while($row = $ses_sql->fetch(PDO::FETCH_ASSOC)) {
-					$login_session=$row['emp_company_email'];
-					$login_id=$row['emp_id'];
-					$_SESSION['level']=$row['level'];
-				}
-				$this->login_id = $login_id;
-				
-    		}
 			$timezone = "Asia/Karachi";
 			if(function_exists('date_default_timezone_set')) date_default_timezone_set($timezone);
 			
-			
-			if(!isset($_SESSION['emp_id']) && $bypass != true)
-			{
-				$login_user=$dbpr->query("SELECT `name` FROM `f_name` Where `emp_id`='$login_id' LIMIT 1 ");
-				$tmp;
-				while($row = $login_user->fetch(PDO::FETCH_ASSOC)) {
-					$tmp=$row['name'];
-				}
-				$_SESSION['user']=$tmp;
-			}
 
 			$inactive = 30 * 60; // Set Sign Out Time in Seconds
 			
@@ -48,21 +25,14 @@ class lock extends dbConn{
 
 			// check if your session life is greater than 30 minutes
 			if ($session_life > $inactive) {
-				session_destroy();
-				header("Location: http://localhost/test/include/logout.php");
+				$checkpage = new allowpage();
+				header("Location: $checkpage->web/include/logout.php");
 				die;
 			}
 		}
 
 		$_SESSION['timeout'] = time();
 
-		if(!isset($login_session) && $bypass != true)
-		{
-			//header("Location: http://localhost/test/erp.php");
-			session_destroy();
-			header("Location: http://localhost/test/include/logout.php");
-			die;
-		}
 	}
 	
 	// always use cleanstring function before insert data into database
@@ -76,13 +46,6 @@ class lock extends dbConn{
 			$string = preg_replace(array('/\s{2,}/', '/[\t\n]/'), ' ', $string);
 		}
 		return $string;
-	}
-	
-	//return empid
-	public function emp_id()
-	{
-		// Emp_id of Login Employee
-		return $this->login_id;
 	}
 	
 	public function require_fields($required){
@@ -234,7 +197,11 @@ class lock extends dbConn{
 		while($row = $result->fetch(PDO::FETCH_ASSOC)) {
 			$rtn[] = $row;	
 		}
-		return $rtn;
+		if(count($rtn) == 1) {
+			return $rtn[0];
+		} else {
+			return $rtn;	
+		}
 	}
 	
 	public function table_count(){
@@ -264,11 +231,15 @@ class lock extends dbConn{
 	public function run_query($sql){
 		$dbpr = parent::getConnection();
 		$result = $dbpr->query($sql);
-		$rtn = array();
+		$arr;
 		while ($row = $result->fetch(PDO::FETCH_ASSOC)){
-			$rtn[] = $row;
+			$arr[] = $row;
 		}
-		return $rtn;
+		if(count($arr) == 1) {
+			return $arr[0];
+		} else {
+			return $arr;	
+		}
 	}
 	
 	public function initials(){

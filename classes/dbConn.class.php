@@ -54,7 +54,7 @@ class dbConn{
 	}
 	
 	//Validate Form Field 
-	public static function validate($myusername,$mypassword){
+	public static function validate($myusername,$mypassword,$login = false){
 		//use database connection
 		$dbpr = self::getConnection();
 		// check empid of user
@@ -63,13 +63,21 @@ class dbConn{
 		if($empid)
 		{
 			$mypassword = self::encode($mypassword,$empid);
-			$sql="SELECT `level` FROM `login` WHERE `username`='$myusername' and `password`='$mypassword'  and `level` IS NOT NULL";
+			$sql="SELECT `emp_id`,`level` FROM `login` WHERE `username`='$myusername' and `password`='$mypassword'  and `level` IS NOT NULL";
 			$result=$dbpr ->query($sql);
-			$count = $result ->rowCount();
+
+			if($login == false){
+				$row = $result ->rowCount(); 
+			} else {
+				$row = $result->fetch(PDO::FETCH_ASSOC);
+				$name = $dbpr->query("SELECT concat_ws(' ',`firstname`,`middlename`,`lastname`) AS `name` FROM `basic_info` WHERE `emp_id` = '".$row['emp_id']."' ");
+				$name = $name->fetch(PDO::FETCH_ASSOC);
+				$row['name'] = $name['name'];
+			}	
 		}
-		if($count == 1)
+		if($row)
 		{
-			$rtn = true; // If Found Then Return True
+			$rtn = $row; // If Found Then Return emp_id , Access Level
 		}
 		return $rtn;
 	}

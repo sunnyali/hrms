@@ -1,7 +1,8 @@
 <?php
-     require ($_SERVER['DOCUMENT_ROOT'].'/hrms/classes/__autoload.php');
+    require ($_SERVER['DOCUMENT_ROOT'].'/hrms/classes/__autoload.php');
+    dbName::mysql_db(0);
     $checkpage = new allowpage();
-
+    $lock = new lock();
 ?>
 
     <?php include ($checkpage->root.'\include\header.php'); ?>
@@ -25,8 +26,9 @@
         
         <!-- include Footer-->
             <?php include ($checkpage->root.'\include\footer.php'); ?>
-        <!-- Footer End-->      
+        <!-- Footer End-->
         
+        <?php var_dump($_SESSION); ?>
     </body>
     
 </html>

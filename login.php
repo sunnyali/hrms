@@ -1,5 +1,9 @@
 
 <?php
+    if(isset($_SESSION))
+    {
+        session_destroy();
+    }
     require ($_SERVER['DOCUMENT_ROOT'].'/hrms/classes/__autoload.php');
 
     dbName::mysql_db(0);
@@ -13,11 +17,14 @@
         $myusername=mysql_real_escape_string($myusername);
         $mypassword=mysql_real_escape_string($mypassword);
         $chk = NULL;
-        $chk = dbConn::validate($myusername, $mypassword);
+        $chk = dbConn::validate($myusername, $mypassword , true);
         if($chk)
         {
+            $_SESSION['emp_id'] = $chk['emp_id'];
+            $_SESSION['name'] = $chk['name'];
+            $_SESSION['level'] = $chk['level'];
             $checkpage = new allowpage();
-            header("location: $checkpage->web/hrms/substation.php");
+            header("location: $checkpage->web\substation.php");
             die();
         }
         else
