@@ -16,7 +16,7 @@
         <link href="<?php echo $checkpage->web ?>/css/reset.css" rel="stylesheet" type="text/css"/>
         <!-- Custom CSS files -->
         <link href="<?php echo $checkpage->web ?>/css/main.css" rel="stylesheet" type="text/css"/>
-
+        <link href="<?php echo $checkpage->web ?>/css/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" type="text/css"/>
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

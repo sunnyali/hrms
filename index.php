@@ -27,7 +27,12 @@
         <!-- include Footer-->
             <?php include ($checkpage->root.'/include/footer.php'); ?>
         <!-- Footer End-->
-        
+        <script type="text/javascript">
+            $(document).ready(function(){
+                // Add Classes to Dropdown Menu
+                $('#menu ul li:nth-child(2)').addClass("current");
+            });   
+        </script>
        
     </body>
     

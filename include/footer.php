@@ -4,4 +4,4 @@
 	
      <!-- Owais and Ali -->   
         <script src="<?php echo $checkpage->web ?>/js/jquery-1.10.1.min.js" type="text/javascript"> </script>
-		<script src="<?php echo $checkpage->web ?>/js/jquery-ui.js" type="text/javascript"> </script>
+		<script src="<?php echo $checkpage->web ?>/js/jquery-ui-1.10.3.custom.min.js" type="text/javascript"> </script>

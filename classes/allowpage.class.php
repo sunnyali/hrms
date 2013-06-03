@@ -13,8 +13,8 @@ class allowpage{
 			session_start();
 		}
 		$this->server = "http://".$_SERVER["SERVER_NAME"];
-		$this->web = $this->server;
-		$this->root = $_SERVER['DOCUMENT_ROOT'];
+		$this->web = $this->server."\hrms";
+		$this->root = $_SERVER['DOCUMENT_ROOT']."\hrms";
 		$this->phpself = $this->server.$_SERVER['PHP_SELF'];
 	}
 	

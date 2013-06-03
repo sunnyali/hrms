@@ -44,7 +44,10 @@
     //}
 
     if(isset($sucess)) {
-        header("Location:$checkpage->phpself?sucess=true");
+        $sql = "SELECT `emp_id` FROM `basic_info` ORDER BY `emp_id` DESC LIMIT 1";
+        $emid = $lock->run_query($sql);
+        $emid = $emid['emp_id'];
+        header("Location:$checkpage->web/employee/profile/profile.php?emid=$emid");
         die();
     }
     else if(isset($error)) {
@@ -80,7 +83,7 @@
                     </div>
 
                     <div class="inner">
-<form id="formID" onsubmit="return jQuery(this).validationEngine('validate');" class="formular" method="post" enctype="multipart/form-data">
+                        <form id="formID" onsubmit="return jQuery(this).validationEngine('validate');" class="formular" method="post" enctype="multipart/form-data">
                             <fieldset>
                                 <ol>
                                     <br>
@@ -88,7 +91,7 @@
                                         <ol class="fieldsInLine">
                                             <li>
                                                 <div class="fieldDescription"><em>*</em> First Name</div>
-                 <input  maxlength="30" type="text" name="firstName" class="validate[required] text-input">
+                                                    <input  maxlength="30" type="text" name="firstName" class="validate[required] text-input">
                                             </li>
                                             <li>
                                                 <div class="fieldDescription">Middle Name</div>
@@ -131,7 +134,13 @@
 			<script src="../js/RequiredValidator.js" type="text/javascript"> </script>
             <script src="../js/jquery.validationEngine-en.js" type="text/javascript"> </script>
 			<script src="../js/jquery.validationEngine.js" type="text/javascript" ></script>
-
+            <script type="text/javascript">
+                $(document).ready(function(){
+                    // Add Classes to Dropdown Menu
+                    $('#menu ul li:nth-child(3)').addClass("current");
+                    $('#menu ul li:nth-child(3) ul li:nth-child(2)').addClass("selected");
+                });   
+            </script>
 			
     </body>
     

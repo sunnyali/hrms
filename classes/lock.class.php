@@ -75,9 +75,9 @@ class lock extends dbConn{
 			$count = $result ->rowCount();
 			if($count == 1)
 			{
-			if (!(empty($fields[$field]))) {
+			//if (!(empty($fields[$field]))) {
 				$arr[$field] = $this->cleanstring($fields[$field]);
-			}
+			//}
 			}
 		}
 		return $arr;
@@ -142,8 +142,7 @@ class lock extends dbConn{
 		$qry = "";
 		$asql =  "`$arg_list[1]` = '$arg_list[2]' ";
 		$arr = self::make_array($table, $_REQUEST);
-		print_r($arr);
-		echo "<br />";
+		
 		foreach($arr AS $key => $field)
 		{
 			$sql = "SELECT `".$key."` FROM `$table` WHERE ".$key." = '".$field."'";
@@ -231,15 +230,12 @@ class lock extends dbConn{
 	public function run_query($sql){
 		$dbpr = parent::getConnection();
 		$result = $dbpr->query($sql);
-		$arr;
-		while ($row = $result->fetch(PDO::FETCH_ASSOC)){
-			$arr[] = $row;
-		}
+		$arr = $result->fetchAll(PDO::FETCH_ASSOC);
 		if(count($arr) == 1) {
 			return $arr[0];
 		} else {
 			return $arr;	
-		}
+		} 
 	}
 	
 	public function initials(){

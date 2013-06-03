@@ -94,7 +94,7 @@
                                         $result = $lock->run_query($sql);
                                         foreach($result AS $key=>$val){
                                     ?>
-                                        <tr class="<?php echo ($clas % 2 == 0) ? 'even' : 'odd'; ?>">
+                                        <tr class="cursor <?php echo ($clas % 2 == 0) ? 'even' : 'odd'; ?>" onclick="document.location = 'profile/profile.php?emid=<?php echo $val['emp_id']; ?>';" >
                                             <td><input type="checkbox"></td>
                                             <td><?php echo $val['emp_id'] ?></td>
                                             <td><?php echo $val['name'] ?></td>
@@ -142,6 +142,13 @@
          <!-- include Footer-->
             <?php include ($checkpage->root.'\include\footer.php'); ?>
         <!-- Footer End-->           
+        <script type="text/javascript">
+            $(document).ready(function(){
+                // Add Classes to Dropdown Menu
+                $('#menu ul li:nth-child(3)').addClass("current");
+                $('#menu ul li:nth-child(3) ul li:nth-child(1)').addClass("selected");
+            });   
+        </script>
     </body>
     
 </html>

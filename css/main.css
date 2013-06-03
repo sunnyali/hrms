@@ -1694,3 +1694,13 @@ div.personalDetails {
 .cursor{
 	cursor:pointer;
 }
+
+.sucessmsg{
+	background-color:#AFFF6F;
+	color:#460;
+	font-size:1.4em;
+	text-align:center;
+	width:600px;
+	height:25px;
+	padding-top: 10px;
+}

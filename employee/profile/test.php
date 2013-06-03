@@ -49,7 +49,7 @@
               </div>    
             </div> <!-- profile-pic -->        
                     
-                
+              <?php include ($checkpage->root.'\include\profilemenu.php'); ?>  
 
             </div> <!-- sidebar -->
                 
